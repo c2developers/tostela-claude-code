@@ -37,6 +37,8 @@ opcion date_format "j \d\e F \d\e Y"
 opcion time_format "H:i"
 opcion start_of_week 1
 opcion default_comment_status closed
+# Los buscadores no indexan la tienda hasta que esté terminada: al publicar, esto se pone en 1.
+opcion blog_public 0
 wp rewrite structure "/%postname%/" --quiet
 wp plugin delete hello akismet --quiet 2>/dev/null || true
 wp theme delete twentytwentythree twentytwentyfour --quiet 2>/dev/null || true
