@@ -1,0 +1,5 @@
+# Reglas del túnel. La credencial va en TUNNEL_TOKEN (sale de .env).
+ingress:
+  - hostname: tostela.c2developers.com
+    service: http://wordpress:80
+  - service: http_status:404

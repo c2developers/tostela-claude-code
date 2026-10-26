@@ -7,6 +7,17 @@ x-wp-env: &wp-env
   WORDPRESS_DB_NAME: ${DB_NAME}
   WORDPRESS_DB_USER: ${DB_USER}
   WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+  # La imagen ya marca HTTPS cuando el túnel manda X-Forwarded-Proto: https.
+  # En local (127.0.0.1:8086) la tienda usa su URL local; desde fuera, el dominio.
+  WORDPRESS_CONFIG_EXTRA: |
+    $$tostela_local = in_array($$_SERVER['HTTP_HOST'] ?? '', ['127.0.0.1:8086', 'localhost:8086'], true);
+    define('WP_HOME', $$tostela_local ? 'http://' . $$_SERVER['HTTP_HOST'] : 'https://tostela.c2developers.com');
+    define('WP_SITEURL', WP_HOME);
+    define('DISALLOW_FILE_EDIT', true);
+    if (!$$tostela_local && PHP_SAPI !== 'cli' && empty($$_SERVER['HTTPS'])) {
+      header('Location: https://tostela.c2developers.com' . ($$_SERVER['REQUEST_URI'] ?? '/'), true, 301);
+      exit;
+    }
 
 services:
   db:
@@ -49,10 +60,23 @@ services:
     environment:
       <<: *wp-env
       HOME: /tmp
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
     volumes:
       - wp_data:/var/www/html
       - ./contenido:/proyecto/contenido:ro
       - ./assets:/proyecto/assets:ro
+
+  # Publica la tienda en https://tostela.c2developers.com (reglas en cloudflared/config.yml).
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.4
+    restart: unless-stopped
+    depends_on:
+      - wordpress
+    command: tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    volumes:
+      - ./cloudflared/config.yml:/etc/cloudflared/config.yml:ro
 
 volumes:
   db_data:
