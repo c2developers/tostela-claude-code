@@ -60,6 +60,9 @@ vuelve a empezar.
 - Los pagos son con tarjeta, con el plugin oficial de Stripe en modo de prueba (`scripts/wp-pagos.sh`). El script no toca
   las claves: la cuenta se conecta a mano desde WooCommerce > Ajustes > Pagos > Stripe, y conviene hacerlo entrando por
   `https://tostela.c2developers.com/wp-admin`, para que el aviso (webhook) de Stripe apunte al dominio público.
+- El webhook de Stripe (el aviso de que un pago se ha completado) se registra con `scripts/stripe-webhook.sh`. No va
+  en `instalar.sh` porque escribe en tu cuenta de Stripe, así que se lanza a mano. Solo crea el endpoint de esta tienda
+  y no toca los de otras tiendas de la misma cuenta; si ya existe y se guardó su secreto, no hace nada.
 - Solo tarjeta: el plugin usa su propia lista de métodos (`pmc_enabled` a «no» en `scripts/pagos.php`), no la del panel
   de Stripe. Aun así, si Link está activado en la cuenta de Stripe, el formulario de tarjeta de Stripe puede ofrecerlo:
   eso solo se apaga en Stripe (Ajustes > Métodos de pago > Link).
