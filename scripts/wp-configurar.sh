@@ -98,8 +98,8 @@ woo tax_class create --name="IVA reducido" >/dev/null 2>&1
 for id in $(woo tax list --field=id); do
   woo tax delete "$id" --force=true --quiet
 done
-woo tax create --country=ES --rate=21 --name=IVA --shipping=true --priority=1 --quiet
-woo tax create --country=ES --rate=10 --name=IVA --shipping=true --priority=1 --class=iva-reducido --quiet
+woo tax create --country=ES --rate=21 --name="IVA 21 %" --shipping=true --priority=1 --quiet
+woo tax create --country=ES --rate=10 --name="IVA 10 %" --shipping=true --priority=1 --class=iva-reducido --quiet
 
 wp cache flush --quiet
 echo "✓ WordPress y WooCommerce configurados"
