@@ -16,3 +16,7 @@ copias/
 
 # Capturas de pantalla de las pruebas
 capturas/
+
+# Caché de Python
+__pycache__/
+*.pyc
