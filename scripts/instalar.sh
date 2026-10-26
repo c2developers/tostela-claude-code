@@ -16,11 +16,13 @@ fi
 
 # Sin túnel mientras se instala: un WordPress a medio instalar no debe verse desde fuera.
 docker compose stop cloudflared 2>/dev/null || true
+trap '[[ $? -eq 0 ]] || echo "⚠ La instalación ha fallado y el túnel sigue parado. Arréglalo y vuelve a ejecutar scripts/instalar.sh."' EXIT
 docker compose up -d db wordpress
 
 docker compose run --rm wpcli bash /proyecto/scripts/wp-configurar.sh
 docker compose run --rm wpcli bash /proyecto/scripts/wp-tema.sh
 docker compose run --rm wpcli bash /proyecto/scripts/wp-pagos.sh
+docker compose run --rm wpcli bash /proyecto/scripts/wp-correo.sh
 docker compose run --rm wpcli wp eval-file /proyecto/scripts/envios.php
 docker compose run --rm wpcli wp eval-file /proyecto/scripts/catalogo.php
 

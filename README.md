@@ -24,6 +24,14 @@ vuelve a empezar.
   reparte según lo que lleva. Las reglas están en `mu-plugins/tostela-tienda.php`.
 - `scripts/probar-tienda.py` comprueba todo eso contra la API de la tienda, sin pagar nada.
 
+## Correo
+
+- WooCommerce manda sus correos con WP Mail SMTP por Resend (`scripts/wp-correo.sh`). La clave y el remitente salen
+  de `.env` (`RESEND_API_KEY` y `CORREO_REMITENTE`) y llegan a WordPress como constantes en `docker-compose.yml`, así
+  que no se guardan en la base de datos.
+- `scripts/probar-correo.sh [destinatario]` manda dos correos de prueba (por defecto a `delivered@resend.dev`) y
+  consulta a Resend en qué estado están.
+
 ## Pagos y compras de prueba
 
 - Los pagos son con tarjeta, con el plugin oficial de Stripe en modo de prueba (`scripts/wp-pagos.sh`). El script no toca

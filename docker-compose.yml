@@ -7,6 +7,8 @@ x-wp-env: &wp-env
   WORDPRESS_DB_NAME: ${DB_NAME}
   WORDPRESS_DB_USER: ${DB_USER}
   WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+  RESEND_API_KEY: ${RESEND_API_KEY:-}
+  CORREO_REMITENTE: ${CORREO_REMITENTE:-}
   # La imagen ya marca HTTPS cuando el túnel manda X-Forwarded-Proto: https.
   # En local (127.0.0.1:8086) la tienda usa su URL local; desde fuera, el dominio.
   WORDPRESS_CONFIG_EXTRA: |
@@ -14,6 +16,22 @@ x-wp-env: &wp-env
     define('WP_HOME', $$tostela_local ? 'http://' . $$_SERVER['HTTP_HOST'] : 'https://tostela.c2developers.com');
     define('WP_SITEURL', WP_HOME);
     define('DISALLOW_FILE_EDIT', true);
+    // Correo: WP Mail SMTP manda por Resend con la clave y el remitente de .env (no se guardan en la base de datos).
+    if (getenv('RESEND_API_KEY')) {
+      $$tostela_remitente = trim((string) getenv('CORREO_REMITENTE'));
+      $$tostela_nombre = 'Tostela';
+      if (preg_match('/^(.*)<([^>]+)>$/', $$tostela_remitente, $$tostela_partes)) {
+        $$tostela_nombre = trim($$tostela_partes[1], " \"'") ?: $$tostela_nombre;
+        $$tostela_remitente = trim($$tostela_partes[2]);
+      }
+      define('WPMS_ON', true);
+      define('WPMS_MAILER', 'resend');
+      define('WPMS_RESEND_API_KEY', getenv('RESEND_API_KEY'));
+      define('WPMS_MAIL_FROM', $$tostela_remitente);
+      define('WPMS_MAIL_FROM_FORCE', true);
+      define('WPMS_MAIL_FROM_NAME', $$tostela_nombre);
+      define('WPMS_MAIL_FROM_NAME_FORCE', true);
+    }
     if (!$$tostela_local && PHP_SAPI !== 'cli' && empty($$_SERVER['HTTPS'])) {
       header('Location: https://tostela.c2developers.com' . ($$_SERVER['REQUEST_URI'] ?? '/'), true, 301);
       exit;
