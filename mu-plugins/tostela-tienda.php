@@ -10,6 +10,20 @@ defined( 'ABSPATH' ) || exit;
 const TOSTELA_PROVINCIAS_SIN_ENVIO = array( 'GC', 'TF', 'CE', 'ML' );
 const TOSTELA_CP_SIN_ENVIO         = array( '35', '38', '51', '52' );
 
+/**
+ * ¿La petición viene de este equipo (localhost:8086) y no de internet? Las que llegan por el túnel de
+ * Cloudflare siempre traen las cabeceras Cf-Ray y Cf-Connecting-Ip, y además el túnel solo acepta el dominio.
+ */
+function tostela_es_local() {
+	$host = $_SERVER['HTTP_HOST'] ?? '';
+	return in_array( $host, array( 'localhost:8086', '127.0.0.1:8086' ), true )
+		&& empty( $_SERVER['HTTP_CF_RAY'] )
+		&& empty( $_SERVER['HTTP_CF_CONNECTING_IP'] );
+}
+
+// Mientras la tienda está en «próximamente», en local se ve entera: así se pueden hacer las compras de prueba.
+add_filter( 'woocommerce_coming_soon_exclude', 'tostela_es_local' );
+
 /** Quita esas provincias del desplegable de la dirección. */
 add_filter(
 	'woocommerce_states',

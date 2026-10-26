@@ -24,6 +24,14 @@ vuelve a empezar.
   reparte según lo que lleva. Las reglas están en `mu-plugins/tostela-tienda.php`.
 - `scripts/probar-tienda.py` comprueba todo eso contra la API de la tienda, sin pagar nada.
 
+## Pagos y compras de prueba
+
+- Los pagos son con tarjeta, con el plugin oficial de Stripe en modo de prueba (`scripts/wp-pagos.sh`). El script no toca
+  las claves: la cuenta se conecta a mano desde WooCommerce > Ajustes > Pagos > Stripe, y conviene hacerlo entrando por
+  `https://tostela.c2developers.com/wp-admin`, para que el aviso (webhook) de Stripe apunte al dominio público.
+- Las compras de prueba se hacen en `http://localhost:8086`. En local la tienda se ve entera aunque en internet siga en
+  «próximamente» (la regla está en `mu-plugins/tostela-tienda.php`) y WordPress usa esa dirección en los enlaces.
+
 La tienda queda en <http://127.0.0.1:8086>. Para usar WP-CLI:
 
 ```sh
