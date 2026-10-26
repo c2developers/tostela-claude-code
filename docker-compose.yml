@@ -65,6 +65,7 @@ services:
       - wp_data:/var/www/html
       - ./contenido:/proyecto/contenido:ro
       - ./assets:/proyecto/assets:ro
+      - ./scripts:/proyecto/scripts:ro
 
   # Publica la tienda en https://tostela.c2developers.com (reglas en cloudflared/config.yml).
   cloudflared:
