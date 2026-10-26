@@ -23,6 +23,7 @@ docker compose run --rm wpcli bash /proyecto/scripts/wp-configurar.sh
 docker compose run --rm wpcli bash /proyecto/scripts/wp-tema.sh
 docker compose run --rm wpcli bash /proyecto/scripts/wp-pagos.sh
 docker compose run --rm wpcli bash /proyecto/scripts/wp-correo.sh
+docker compose run --rm wpcli bash /proyecto/scripts/wp-cookies.sh
 docker compose run --rm wpcli wp eval-file /proyecto/scripts/envios.php
 docker compose run --rm wpcli wp eval-file /proyecto/scripts/catalogo.php
 

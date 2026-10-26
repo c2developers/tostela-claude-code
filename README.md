@@ -24,6 +24,17 @@ vuelve a empezar.
   reparte según lo que lleva. Las reglas están en `mu-plugins/tostela-tienda.php`.
 - `scripts/probar-tienda.py` comprueba todo eso contra la API de la tienda, sin pagar nada.
 
+## Cookies y analítica
+
+- El aviso es de CookieYes, en español, con «Rechazar» tan visible como «Aceptar» (`scripts/wp-cookies.sh`). Las
+  categorías y las cookies de la tienda están en `scripts/cookies.php`.
+- Google Analytics (`G-7W4E0KE2BV`) y el píxel de Meta (`2587624965028846`) se cargan desde
+  `mu-plugins/tostela-cookies.php`, con Consent Mode v2: todo denegado por defecto y, hasta que el visitante acepta,
+  no se descarga nada de Google ni de Meta. Analítica gobierna Google Analytics y Publicidad gobierna el píxel de Meta.
+- `scripts/probar-cookies.py` lo comprueba en un Chrome de verdad (necesita `pip install websocket-client`): primera
+  visita, rechazar, aceptar, elegir solo analítica y retirar el consentimiento. Bloquea el envío real de datos para no
+  ensuciar Analytics ni el píxel.
+
 ## Correo
 
 - WooCommerce manda sus correos con WP Mail SMTP por Resend (`scripts/wp-correo.sh`). La clave y el remitente salen
