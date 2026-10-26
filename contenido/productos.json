@@ -1,0 +1,66 @@
+{
+  "categorias": [
+    { "slug": "cafes", "nombre": "Cafés", "descripcion": "De origen único y mezclas, tostados cada martes." },
+    { "slug": "accesorios", "nombre": "Accesorios", "descripcion": "Lo justo para preparar buen café en casa." }
+  ],
+  "molienda": ["En grano", "Espresso", "Filtro", "Prensa francesa"],
+  "cafes": [
+    {
+      "sku": "CAF-ETI", "nombre": "Etiopía Yirgacheffe", "origen": "Etiopía", "destacado": true, "imagen": "etiopia.jpg",
+      "notas": ["Jazmín", "Bergamota", "Melocotón"],
+      "ficha": { "Región": "Yirgacheffe, Gedeo", "Altura": "1.900–2.200 m", "Variedad": "Variedades locales etíopes", "Proceso": "Lavado", "Tueste": "Claro" },
+      "corto": "Floral y delicado, con un final de melocotón. Un café para filtro que se bebe como un té.",
+      "precios": { "250 g": 14.50, "1 kg": 49.00 }
+    },
+    {
+      "sku": "CAF-COL", "nombre": "Colombia Huila", "origen": "Colombia", "destacado": true, "imagen": "colombia.jpg",
+      "notas": ["Caramelo", "Manzana roja", "Cacao"],
+      "ficha": { "Región": "Huila", "Altura": "1.600–1.800 m", "Variedad": "Caturra y Castillo", "Proceso": "Lavado", "Tueste": "Medio" },
+      "corto": "Dulce y redondo, el café de todos los días que nunca aburre.",
+      "precios": { "250 g": 12.90, "1 kg": 43.00 }
+    },
+    {
+      "sku": "CAF-KEN", "nombre": "Kenia Nyeri AA", "origen": "Kenia", "destacado": true, "imagen": "kenia.jpg",
+      "notas": ["Grosella negra", "Pomelo", "Panela"],
+      "ficha": { "Región": "Nyeri", "Altura": "1.700–1.900 m", "Variedad": "SL28 y SL34", "Proceso": "Lavado", "Tueste": "Claro" },
+      "corto": "Jugoso y vibrante: acidez de fruta roja y un dulzor de panela que se queda.",
+      "precios": { "250 g": 15.90, "1 kg": 54.00 }
+    },
+    {
+      "sku": "CAF-BRA", "nombre": "Brasil Cerrado Mineiro", "origen": "Brasil", "destacado": true, "imagen": "brasil.jpg",
+      "notas": ["Avellana", "Chocolate negro", "Cuerpo cremoso"],
+      "ficha": { "Región": "Cerrado Mineiro, Minas Gerais", "Altura": "1.000–1.200 m", "Variedad": "Mundo Novo y Catuaí", "Proceso": "Natural", "Tueste": "Medio" },
+      "corto": "Chocolate y avellana con mucho cuerpo. Nuestro favorito para espresso y con leche.",
+      "precios": { "250 g": 11.90, "1 kg": 39.00 }
+    },
+    {
+      "sku": "CAF-GUA", "nombre": "Guatemala Huehuetenango", "origen": "Guatemala", "destacado": false, "imagen": "guatemala.jpg",
+      "notas": ["Chocolate con leche", "Almendra", "Ciruela"],
+      "ficha": { "Región": "Huehuetenango", "Altura": "1.500–1.900 m", "Variedad": "Bourbon y Caturra", "Proceso": "Lavado", "Tueste": "Medio" },
+      "corto": "Equilibrado y goloso, con un punto de fruta madura al enfriarse.",
+      "precios": { "250 g": 13.50, "1 kg": 45.00 }
+    },
+    {
+      "sku": "CAF-MAN", "nombre": "Mezcla Mañana", "origen": "Mezcla", "destacado": false, "imagen": "manana.jpg",
+      "notas": ["Cacao", "Caramelo tostado", "Naranja"],
+      "ficha": { "Composición": "Brasil Cerrado (60 %) y Colombia Huila (40 %)", "Proceso": "Natural y lavado", "Tueste": "Medio-oscuro", "Ideal para": "Espresso y café con leche" },
+      "corto": "La mezcla de la casa para espresso: intensa, dulce y sin amargor.",
+      "precios": { "250 g": 11.50, "1 kg": 38.00 }
+    },
+    {
+      "sku": "CAF-DES", "nombre": "Colombia Descafeinado", "origen": "Colombia", "destacado": false, "imagen": "descafeinado.jpg",
+      "notas": ["Panela", "Nuez", "Cítricos suaves"],
+      "ficha": { "Región": "Huila", "Variedad": "Caturra y Castillo", "Proceso": "Descafeinado con acetato de etilo de caña de azúcar", "Tueste": "Medio" },
+      "corto": "Todo el sabor, sin la cafeína: descafeinado con acetato de etilo obtenido de la caña de azúcar.",
+      "precios": { "250 g": 12.90, "1 kg": 43.00 }
+    }
+  ],
+  "accesorios": [
+    { "sku": "ACC-GOT", "nombre": "Gotero cónico de cerámica", "imagen": "gotero.jpg", "precio": 24.00,
+      "corto": "Gotero de cerámica para filtrar de 1 a 3 tazas. Mantiene el calor y realza la acidez del café." },
+    { "sku": "ACC-FIL", "nombre": "Filtros de papel (100 u.)", "imagen": "filtros.jpg", "precio": 6.50,
+      "corto": "Filtros cónicos de papel sin blanquear, del tamaño del gotero." },
+    { "sku": "ACC-MOL", "nombre": "Molinillo manual de muelas cónicas", "imagen": "molinillo.jpg", "precio": 49.00,
+      "corto": "Muelas cónicas de acero y 30 puntos de ajuste: de espresso a prensa francesa con la misma mano." }
+  ]
+}

@@ -1,0 +1,15 @@
+# Claves y contraseñas: nunca al repositorio
+.env
+.env.*
+!.env.example
+
+# Copias de la base de datos
+copias/
+*.sql
+*.sql.gz
+
+# Sistema y editores
+.DS_Store
+*.swp
+.vscode/
+.idea/

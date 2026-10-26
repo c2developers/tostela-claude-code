@@ -1,0 +1,95 @@
+{
+ "estilo": "Editorial product photography for a specialty coffee roaster's website. Warm natural window light from the left, soft long shadows, shallow depth of field, shot on a medium format camera. Muted earthy palette: cream, oat, espresso brown, terracotta and sage. Calm, premium, minimal, lots of negative space. No people's faces, no logos of real brands, no watermarks, no extra text.",
+ "imagenes": [
+  {
+   "archivo": "hero.jpg",
+   "donde": "tema",
+   "aspecto": "16:9",
+   "prompt": "A pour-over coffee being brewed on a light oak counter: a ceramic cone dripper on a glass carafe, a thin stream of hot water from a gooseneck kettle, steam rising, freshly roasted coffee beans scattered on a linen cloth, a small ceramic cup. Composition leaves the left two thirds darker and calmer for a headline overlay; the brewing scene sits on the right third."
+  },
+  {
+   "archivo": "tostador.jpg",
+   "donde": "tema",
+   "aspecto": "4:5",
+   "prompt": "Inside a small coffee roastery: a vintage drum coffee roaster with copper and black enamel details, freshly roasted beans tumbling in the round cooling tray, a wisp of smoke, a wooden scoop resting on the edge. Only hands and forearms of the roaster may appear, no face."
+  },
+  {
+   "archivo": "gotero.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "A matte cream ceramic cone coffee dripper with spiral ribs inside, sitting on a small glass carafe, a folded unbleached paper filter beside it, on a cream linen surface. Centered product shot, no brand marks."
+  },
+  {
+   "archivo": "filtros.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "A neat stack of unbleached brown cone paper coffee filters, slightly fanned out, tied with a thin cotton string, on a cream linen surface with a few roasted coffee beans. Centered product shot, no brand marks, no text."
+  },
+  {
+   "archivo": "molinillo.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "A manual coffee grinder with a brushed stainless steel body, a walnut wood knob and a folding crank, standing upright on a cream linen surface, a small pile of ground coffee and whole beans beside it. Centered product shot, no brand marks, no text."
+  },
+  {
+   "archivo": "etiopia.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "A matte stand-up coffee pouch (250 g) in warm cream paper with a wide terracotta horizontal band across the lower middle. Minimal typographic label printed on the pouch: the brand name \"TOSTELA\" in an elegant soft serif near the top, and on the terracotta band the origin \"ETIOPÍA\" in spaced capital letters, with \"Yirgacheffe · Lavado\" in small text below it. A small round saffron yellow sticker on the top right corner of the pouch. A small scoop of freshly roasted coffee beans spilled in front. Centered product shot on a cream linen surface, slight three-quarter angle, the whole pouch visible with margin around it."
+  },
+  {
+   "archivo": "colombia.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "Use the reference image as the exact design template: same pouch shape and size, same cream paper, same terracotta band, same typography and layout, same lighting, camera angle, background and composition. Change only the printed origin to \"COLOMBIA\", the small text below it to \"Huila · Lavado\", and the round sticker color to coral red. Keep the brand name \"TOSTELA\" exactly as in the reference.",
+   "referencias": [
+    "etiopia.jpg"
+   ]
+  },
+  {
+   "archivo": "kenia.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "Use the reference image as the exact design template: same pouch shape and size, same cream paper, same terracotta band, same typography and layout, same lighting, camera angle, background and composition. Change only the printed origin to \"KENIA\", the small text below it to \"Nyeri AA · Lavado\", and the round sticker color to deep berry burgundy. Keep the brand name \"TOSTELA\" exactly as in the reference.",
+   "referencias": [
+    "etiopia.jpg"
+   ]
+  },
+  {
+   "archivo": "brasil.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "Use the reference image as the exact design template: same pouch shape and size, same cream paper, same terracotta band, same typography and layout, same lighting, camera angle, background and composition. Change only the printed origin to \"BRASIL\", the small text below it to \"Cerrado Mineiro · Natural\", and the round sticker color to sage green. Keep the brand name \"TOSTELA\" exactly as in the reference.",
+   "referencias": [
+    "etiopia.jpg"
+   ]
+  },
+  {
+   "archivo": "guatemala.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "Use the reference image as the exact design template: same pouch shape and size, same cream paper, same terracotta band, same typography and layout, same lighting, camera angle, background and composition. Change only the printed origin to \"GUATEMALA\", the small text below it to \"Huehuetenango · Lavado\", and the round sticker color to slate blue. Keep the brand name \"TOSTELA\" exactly as in the reference.",
+   "referencias": [
+    "etiopia.jpg"
+   ]
+  },
+  {
+   "archivo": "manana.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "Use the reference image as the exact design template: same pouch shape and size, same cream paper, same terracotta band, same typography and layout, same lighting, camera angle, background and composition. Change only the printed origin to \"MEZCLA MAÑANA\", the small text below it to \"Espresso · Brasil y Colombia\", and the round sticker color to dark espresso brown. Keep the brand name \"TOSTELA\" exactly as in the reference.",
+   "referencias": [
+    "etiopia.jpg"
+   ]
+  },
+  {
+   "archivo": "descafeinado.jpg",
+   "donde": "productos",
+   "aspecto": "4:5",
+   "prompt": "Use the reference image as the exact design template: same pouch shape and size, same cream paper, same terracotta band, same typography and layout, same lighting, camera angle, background and composition. Change only the printed origin to \"DESCAFEINADO\", the small text below it to \"Colombia · Caña de azúcar\", and the round sticker color to soft mint green. Keep the brand name \"TOSTELA\" exactly as in the reference.",
+   "referencias": [
+    "etiopia.jpg"
+   ]
+  }
+ ]
+}
