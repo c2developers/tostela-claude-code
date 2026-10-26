@@ -20,3 +20,5 @@ capturas/
 # Caché de Python
 __pycache__/
 *.pyc
+
+*.tar.gz
