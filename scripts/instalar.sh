@@ -26,6 +26,7 @@ docker compose run --rm wpcli bash /proyecto/scripts/wp-correo.sh
 docker compose run --rm wpcli bash /proyecto/scripts/wp-cookies.sh
 docker compose run --rm wpcli wp eval-file /proyecto/scripts/envios.php
 docker compose run --rm wpcli wp eval-file /proyecto/scripts/catalogo.php
+docker compose run --rm wpcli wp eval-file /proyecto/scripts/paginas.php
 
 docker compose up -d cloudflared
 echo "Listo: https://tostela.c2developers.com (en local, http://127.0.0.1:8086)"

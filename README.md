@@ -24,6 +24,18 @@ vuelve a empezar.
   reparte según lo que lleva. Las reglas están en `mu-plugins/tostela-tienda.php`.
 - `scripts/probar-tienda.py` comprueba todo eso contra la API de la tienda, sin pagar nada.
 
+## Páginas y desistimiento
+
+- Los textos de `contenido/paginas/` se cargan como páginas con `scripts/paginas.php` (se puede repetir): nuestra
+  historia, contacto, envíos y devoluciones, desistir, aviso legal, condiciones de venta, política de privacidad y
+  política de cookies. Las legales siguen con sus corchetes y el aviso de plantilla: hay que rellenarlas y revisarlas.
+- El pie de la web enlaza a todas, y la página de pago pide marcar las condiciones (con enlaces a las condiciones, la
+  privacidad, el desistimiento y las devoluciones) y su botón dice «Realizar pedido con obligación de pago».
+- El formulario de `/desistir/` está en `mu-plugins/tostela-desistimiento.php`: avisa a la tienda por correo, manda un
+  acuse de recibo al cliente, deja constancia en WooCommerce > Desistimientos y una nota en el pedido. Lleva casilla
+  trampa, límite de 5 envíos por hora y visitante, y no guarda la IP.
+- `scripts/probar-paginas.py` lo prueba todo (necesita Chrome y `pip install websocket-client`).
+
 ## Cookies y analítica
 
 - El aviso es de CookieYes, en español, con «Rechazar» tan visible como «Aceptar» (`scripts/wp-cookies.sh`). Las
