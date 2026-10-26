@@ -13,3 +13,6 @@ copias/
 *.swp
 .vscode/
 .idea/
+
+# Capturas de pantalla de las pruebas
+capturas/

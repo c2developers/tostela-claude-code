@@ -48,6 +48,7 @@ services:
       - "127.0.0.1:8086:80"
     volumes:
       - wp_data:/var/www/html
+      - ./tema/tostela:/var/www/html/wp-content/themes/tostela:ro
 
   # Uso: docker compose run --rm wpcli wp <orden>
   wpcli:
@@ -63,6 +64,7 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
     volumes:
       - wp_data:/var/www/html
+      - ./tema/tostela:/var/www/html/wp-content/themes/tostela:ro
       - ./contenido:/proyecto/contenido:ro
       - ./assets:/proyecto/assets:ro
       - ./scripts:/proyecto/scripts:ro

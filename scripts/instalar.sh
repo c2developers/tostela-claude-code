@@ -19,6 +19,7 @@ docker compose stop cloudflared 2>/dev/null || true
 docker compose up -d db wordpress
 
 docker compose run --rm wpcli bash /proyecto/scripts/wp-configurar.sh
+docker compose run --rm wpcli bash /proyecto/scripts/wp-tema.sh
 
 docker compose up -d cloudflared
 echo "Listo: https://tostela.c2developers.com (en local, http://127.0.0.1:8086)"
