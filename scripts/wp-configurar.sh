@@ -55,6 +55,9 @@ opcion woocommerce_onboarding_profile '{"skipped":true}' --format=json
 opcion woocommerce_task_list_hidden_lists '["setup","extended"]' --format=json
 opcion woocommerce_show_marketplace_suggestions no
 opcion woocommerce_allow_tracking no
+# Sin «atribución de pedidos»: guarda cookies de seguimiento (sbjs_*) en todas las páginas antes de que el visitante
+# elija nada en el aviso de cookies. La analítica ya la hace Google Analytics, y solo con consentimiento.
+opcion woocommerce_feature_order_attribution_enabled no
 
 # Modo «próximamente» hasta que la tienda esté lista: quien no ha entrado como administrador ve un aviso.
 opcion woocommerce_coming_soon yes

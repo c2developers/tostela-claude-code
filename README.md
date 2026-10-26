@@ -48,6 +48,10 @@ vuelve a empezar.
 - Los pagos son con tarjeta, con el plugin oficial de Stripe en modo de prueba (`scripts/wp-pagos.sh`). El script no toca
   las claves: la cuenta se conecta a mano desde WooCommerce > Ajustes > Pagos > Stripe, y conviene hacerlo entrando por
   `https://tostela.c2developers.com/wp-admin`, para que el aviso (webhook) de Stripe apunte al dominio público.
+- Solo tarjeta: el plugin usa su propia lista de métodos (`pmc_enabled` a «no» en `scripts/pagos.php`), no la del panel
+  de Stripe. Aun así, si Link está activado en la cuenta de Stripe, el formulario de tarjeta de Stripe puede ofrecerlo:
+  eso solo se apaga en Stripe (Ajustes > Métodos de pago > Link).
+- Stripe.js solo se carga en el carrito y al pagar (y con él sus cookies antifraude, que figuran como necesarias).
 - Las compras de prueba se hacen en `http://localhost:8086`. En local la tienda se ve entera aunque en internet siga en
   «próximamente» (la regla está en `mu-plugins/tostela-tienda.php`) y WordPress usa esa dirección en los enlaces.
 

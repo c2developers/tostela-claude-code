@@ -55,6 +55,11 @@ $cookies = array(
 	array( 'wp_woocommerce_session_*', 'wp-woocommerce-session', 'necessary', 'Guarda tu carrito y tu sesión de compra.', '2 días', '' ),
 	array( 'woocommerce_cart_hash', 'woocommerce-cart-hash', 'necessary', 'Ayuda a WooCommerce a saber cuándo cambia el contenido del carrito.', 'Sesión', '' ),
 	array( 'woocommerce_items_in_cart', 'woocommerce-items-in-cart', 'necessary', 'Indica si hay productos en el carrito.', 'Sesión', '' ),
+	// Stripe (el procesador de pagos) las guarda en el carrito y al pagar, para prevenir el fraude.
+	array( '__stripe_mid', 'stripe-mid', 'necessary', 'Stripe, nuestro procesador de pagos, la usa para prevenir el fraude. Solo se guarda en el carrito y al pagar.', '1 año', '' ),
+	array( '__stripe_sid', 'stripe-sid', 'necessary', 'Stripe, nuestro procesador de pagos, la usa para prevenir el fraude. Solo se guarda en el carrito y al pagar.', '30 minutos', '' ),
+	array( 'm', 'stripe-m', 'necessary', 'Stripe (m.stripe.com) la usa para prevenir el fraude en los pagos. Solo se guarda en el carrito y al pagar.', '2 años', '' ),
+	array( '__cf_bm', 'cf-bm', 'necessary', 'hCaptcha, que usa Stripe para distinguir personas de robots al pagar. Solo se guarda al pagar.', '30 minutos', '' ),
 	array( '_ga', 'ga', 'analytics', 'Google Analytics la usa para distinguir a los visitantes y contar las visitas.', '2 años', 'googletagmanager.com|google-analytics.com|analytics.google.com' ),
 	// Con su nombre exacto (lleva el identificador de medición) para que CookieYes la borre si se retira el consentimiento.
 	array( '_ga_7W4E0KE2BV', 'ga-id', 'analytics', 'Google Analytics guarda con ella el estado de la sesión.', '2 años', 'googletagmanager.com|google-analytics.com|analytics.google.com' ),

@@ -35,6 +35,13 @@ add_filter(
 	}
 );
 
+/**
+ * Stripe.js (y con él las cookies de Stripe: __stripe_mid, __stripe_sid, m…) solo se carga donde se paga, en
+ * «Finalizar compra». Sin esto, el plugin lo carga también en la ficha de producto y en el carrito.
+ */
+add_filter( 'wc_stripe_load_scripts_on_product_page_when_prbs_disabled', '__return_false' );
+add_filter( 'wc_stripe_load_scripts_on_cart_page_when_prbs_disabled', '__return_false' );
+
 /** La plantilla de la ficha de producto de WooCommerce trae «Category: » sin traducir. */
 add_filter(
 	'render_block_data',

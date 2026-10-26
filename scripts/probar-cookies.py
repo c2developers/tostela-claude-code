@@ -9,6 +9,7 @@ Cada caso usa un perfil de navegador limpio y mira qué peticiones salen a Googl
 prueba, pero el intento se sigue viendo y se comprueba.
 """
 import json
+import re
 import shutil
 import socket
 import subprocess
@@ -307,7 +308,77 @@ def retirar_consentimiento(n):
     comprobar("Consent Mode vuelve a denegado", bool(actualizaciones) and all(v == "denied" for v in actualizaciones[-1].values()), str(actualizaciones[-1:] if actualizaciones else ""))
 
 
+PAGINAS = ("/", "/tienda/", "/producto/etiopia-yirgacheffe/", "/categoria-producto/accesorios/", "/carrito/")
+NECESARIAS = re.compile(r"^(cookieyes.*|woocommerce_.*|wp_woocommerce_session_.*|wordpress_.*|wp-settings-.*)$")
+# Stripe (prevención del fraude) solo puede guardar sus cookies en el carrito y al pagar, nunca antes.
+NECESARIAS_CON_STRIPE = re.compile(NECESARIAS.pattern[:-2] + r"|__stripe_mid|__stripe_sid|m)$")
+DE_GOOGLE_O_META = re.compile(r"^(_ga|_ga_.*|_gid|_gat.*|_gcl_.*|_gac_.*|_fbp|_fbc|fr|datr|sb)$")
+DOMINIOS_AJENOS = re.compile(r"google|facebook|doubleclick|fb\.com|analytics")
+
+
+def auditar(n, con_stripe=False):
+    """Todas las cookies del navegador (de cualquier dominio) y el almacenamiento local, sin sus valores."""
+    jar = [(c["name"], c["domain"]) for c in n.enviar("Network.getAllCookies")["cookies"]]
+    permitidas = NECESARIAS_CON_STRIPE if con_stripe else NECESARIAS
+    almacenamiento = json.loads(n.js("JSON.stringify({local:Object.keys(localStorage),sesion:Object.keys(sessionStorage)})") or "{}")
+    return {
+        "cookies": sorted(nombre for nombre, _ in jar),
+        "de_google_o_meta": sorted(nombre for nombre, dominio in jar if DE_GOOGLE_O_META.match(nombre) or DOMINIOS_AJENOS.search(dominio)),
+        "no_necesarias": sorted(nombre for nombre, _ in jar if not permitidas.match(nombre)),
+        "almacenamiento": almacenamiento["local"] + almacenamiento["sesion"],
+        "almacenamiento_ajeno": [k for k in almacenamiento["local"] + almacenamiento["sesion"] if re.search(r"_ga|_gcl|_fb|fbevents|google|facebook", k, re.I)],
+    }
+
+
+def recorrer(n, rutas):
+    for ruta in rutas:
+        n.ir(ruta)
+        n.js("window.scrollTo(0, document.body.scrollHeight)")
+        n.esperar(1)
+
+
+def sin_nada_de_google_ni_meta(n, momento, con_stripe=False):
+    a = auditar(n, con_stripe)
+    print(f"      Cookies {momento}: {', '.join(a['cookies']) or 'ninguna'}  |  almacenamiento: {', '.join(a['almacenamiento']) or 'vacío'}")
+    comprobar(f"{momento}: ni Google ni Meta han guardado ninguna cookie", not a["de_google_o_meta"], str(a["de_google_o_meta"]))
+    comprobar(
+        f"{momento}: solo hay cookies necesarias de la tienda" + (" (y las de Stripe, que se permiten en el carrito)" if con_stripe else " (ni siquiera las de Stripe)"),
+        not a["no_necesarias"], str(a["no_necesarias"]),
+    )
+    comprobar(f"{momento}: nada de Google ni Meta en el almacenamiento local", not a["almacenamiento_ajeno"], str(a["almacenamiento_ajeno"]))
+    comprobar(f"{momento}: ninguna petición a Google ni a Meta (sin peticiones no hay cookies de terceros)", not n.seguimiento(), str(n.seguimiento()))
+
+
+def auditoria_antes_y_rechazar(n):
+    sin_stripe, carrito = PAGINAS[:-1], PAGINAS[-1]
+    recorrer(n, sin_stripe)
+    sin_nada_de_google_ni_meta(n, f"Antes de aceptar ({len(sin_stripe)} páginas: portada, tienda, ficha y categoría)")
+    recorrer(n, [carrito])
+    sin_nada_de_google_ni_meta(n, "Antes de aceptar, ya en el carrito", con_stripe=True)
+    n.clic('[data-cky-tag="reject-button"]')
+    n.esperar(4)
+    c = consentimiento(n)
+    comprobar("Se ha pulsado «Rechazar» y queda registrado", c.get("action") == "yes" and c.get("analytics") == "no" and c.get("advertisement") == "no", str(c))
+    recorrer(n, PAGINAS)
+    sin_nada_de_google_ni_meta(n, f"Tras rechazar ({len(PAGINAS)} páginas más, carrito incluido)", con_stripe=True)
+
+
+def auditoria_aceptar(n):
+    n.ir("/")
+    sin_nada_de_google_ni_meta(n, "Justo antes de aceptar")
+    n.clic('[data-cky-tag="accept-button"]')
+    n.esperar(8)
+    a = auditar(n)
+    p = peticiones_google_meta(n)
+    print(f"      Cookies tras aceptar: {', '.join(a['cookies'])}")
+    google = [c for c in a["cookies"] if c == "_ga" or c.startswith("_ga_")]
+    comprobar("Google Analytics se activa: se carga, guarda sus cookies (_ga y _ga_…) y envía la visita", bool(p["gtag.js"]) and "_ga" in google and f"_ga_{GA_ID[2:]}" in google and bool(p["collect"]), f"{google} {p['gtag.js']} {p['collect']}")
+    comprobar("El píxel de Meta se activa: se carga, guarda su cookie (_fbp) y envía PageView", bool(p["fbevents"]) and "_fbp" in a["cookies"] and any(PIXEL_ID in u and "ev=PageView" in u for u in p["tr"]), f"{p['fbevents']} {a['cookies']} {p['tr']}")
+
+
 print(f"Probando {BASE}")
+caso("Auditoría: antes de aceptar y al rechazar", auditoria_antes_y_rechazar)
+caso("Auditoría: al aceptar", auditoria_aceptar)
 caso("Primera visita, sin tocar nada", primera_visita)
 caso("Rechazar", rechazar)
 caso("Aceptar", aceptar)
