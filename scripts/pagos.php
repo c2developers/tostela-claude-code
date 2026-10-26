@@ -18,6 +18,9 @@ $ajustes = array_merge(
 		'statement_descriptor'                      => 'TOSTELA',
 		'short_statement_descriptor'                => 'TOSTELA',
 		'upe_checkout_experience_accepted_payments' => array( 'card' ),
+		// Sin Link ni Amazon Pay, tampoco como botones de pago rápido (el plugin entiende "" como «en ningún sitio»).
+		'link_button_locations'                     => '',
+		'amazon_pay_button_locations'               => '',
 	)
 );
 update_option( 'woocommerce_stripe_settings', $ajustes );
